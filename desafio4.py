@@ -1,28 +1,24 @@
+def palindromica(texto: str):
+    def analise(comeco: int, fim: int):
+        while comeco >= 0 and fim < len(texto) and texto[comeco] == texto[fim]:
+            comeco -= 1
+            fim += 1
+        return texto[comeco + 1:fim]
+
+    maior_palindromo = ""
+    for i in range(len(texto)):
+        analise1 = analise(i, i)
+        if len(analise1) > len(maior_palindromo):
+            maior_palindromo = analise1
+
+        analise2 = analise(i, i + 1)
+        if len(analise2) > len(maior_palindromo):
+            maior_palindromo = analise2
+
+    if len(maior_palindromo) > 2:
+        return maior_palindromo
+    else: 
+        return 'Palindromo não encontrado'
+
 entrada = str(input('Digite uma palavra: '))
-
-a = ''
-loop = True
-
-if entrada == entrada[::-1]:
-    a = entrada
-    loop = False
-
-limite = 0
-alcance = len(entrada) - 1
-
-while loop:
-    while limite <= len(entrada):
-        inicio = 0
-        limite = alcance
-        trecho = entrada[inicio:limite]
-        if trecho == trecho[::-1]:
-            a = trecho
-            loop = False
-            break
-        limite += 1
-        inicio += 1
-    alcance -= 1
-    if alcance < 1:
-        loop = False
-
-print(a)
+print(palindromica(entrada))
